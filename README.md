@@ -1,2 +1,2 @@
-# backtracking-problems
-Problems solved using backtracking
+# algorithms
+just for fun
