@@ -33,8 +33,8 @@ public:
 };
 
 /*
-if undirected == true, edges are A --- B
-else A --> B
+if undirected == true, edges are A --- B (A and B have have an edge )
+else A --> B (only A have an edge)
 */
 
 void Graph::deleteEdge(int idA, int idB){
@@ -107,12 +107,13 @@ void Graph::deleteNode(int id){
 		}
 		(*aux)->adj.clear();
 		nodes.erase(aux);
+		numNodes--;
 	}
 }
 
 bool Graph::existEdge(int idA, int idB){
 	node * a = getPointer(idA);
-	list<node*>::iterator it = a->adj.begin();
+	list<node*>::const_iterator it = a->adj.begin();
 	while(it != a->adj.end()){
 		if((*it)->id == idB)
 			return true;
@@ -133,10 +134,10 @@ node * Graph::getPointer(int id){
 }
 
 void Graph::printGraph(){
-	list<node*>::iterator itA = nodes.begin();
+	list<node*>::const_iterator itA = nodes.begin();
 	while(itA != nodes.end()){
 		cout << (*itA)->id << " -> {";
-		list<node*>::iterator itB = (*itA)->adj.begin();
+		list<node*>::const_iterator itB = (*itA)->adj.begin();
 		if(itB != (*itA)->adj.end()){
 			cout << (*itB)->id;
 			itB++;
